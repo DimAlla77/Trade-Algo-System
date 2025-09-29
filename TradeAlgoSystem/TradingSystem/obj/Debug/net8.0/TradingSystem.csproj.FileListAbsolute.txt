@@ -1,0 +1,12 @@
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\bin\Debug\net8.0\TradingSystem.deps.json
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\bin\Debug\net8.0\TradingSystem.dll
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\bin\Debug\net8.0\TradingSystem.pdb
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.AssemblyInfoInputs.cache
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.AssemblyInfo.cs
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.csproj.CoreCompileInputs.cache
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.dll
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\refint\TradingSystem.dll
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.pdb
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\ref\TradingSystem.dll
+C:\Users\allad\Desktop\TradeAlgoSystem\TradeAlgoSystem\TradingSystem\obj\Debug\net8.0\TradingSystem.csproj.AssemblyReference.cache
