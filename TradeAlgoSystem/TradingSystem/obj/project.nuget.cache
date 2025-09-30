@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ldd7j2Yk+GI=",
+  "dgSpecHash": "l9Srgy1Xk4Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
+  "projectFilePath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\Trade-Algo-System\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allad\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\allad\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",

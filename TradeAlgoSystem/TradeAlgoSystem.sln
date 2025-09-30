@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingSystem.ConsoleApp", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingSystem", "TradingSystem\TradingSystem.csproj", "{3095CC2B-DF40-4F8E-8AEC-A92CF4D57544}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingSystem.UI", "TradingSystem.UI\TradingSystem.UI.csproj", "{F883D4FE-5C19-43BE-BA65-FE2EF81398BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3095CC2B-DF40-4F8E-8AEC-A92CF4D57544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3095CC2B-DF40-4F8E-8AEC-A92CF4D57544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3095CC2B-DF40-4F8E-8AEC-A92CF4D57544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F883D4FE-5C19-43BE-BA65-FE2EF81398BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F883D4FE-5C19-43BE-BA65-FE2EF81398BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F883D4FE-5C19-43BE-BA65-FE2EF81398BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F883D4FE-5C19-43BE-BA65-FE2EF81398BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

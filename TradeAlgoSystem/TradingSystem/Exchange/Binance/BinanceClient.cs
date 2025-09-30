@@ -4,6 +4,7 @@
     using System.Text.Json;
     using TradingSystem.Core.Models;
     using TradingSystem.Exchange.Interfaces;
+    using TradingSystem.Helpers.Converters;
 
     public class BinanceClient : IExchangeClient, IDisposable
     {
@@ -141,10 +142,7 @@
 
                 if (doc.RootElement.TryGetProperty("openInterest", out var oi)) // 1883770.928
                 {
-                    double opIn;
-                    var isDouble = double.TryParse(oi.ToString(), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out opIn); // 1881889.090
-                    return isDouble ? opIn : 0.0;   
-                        //oi.GetDouble();
+                    return NumericConverter.GetDouble(oi.GetString());
                 }
             }
 
@@ -216,11 +214,10 @@
             var trade = new Trade
             {
                 Id = root.GetProperty("a").GetInt64().ToString(),
-                Price = double.Parse(root.GetProperty("p").GetString()),
-                Volume = double.Parse(root.GetProperty("q").GetString()),
+                Price = NumericConverter.GetDouble(root.GetProperty("p").GetString()),
+                Volume = NumericConverter.GetDouble(root.GetProperty("q").GetString()),
                 Side = root.GetProperty("m").GetBoolean() ? TradeSide.Sell : TradeSide.Buy,
-                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(
-                    root.GetProperty("T").GetInt64()).UtcDateTime,
+                Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(root.GetProperty("T").GetInt64()).UtcDateTime,
                 Exchange = ExchangeName
             };
 
@@ -242,8 +239,8 @@
                 {
                     snapshot.Bids.Add(new OrderBookLevel
                     {
-                        Price = double.Parse(bid[0].GetString()),
-                        Volume = double.Parse(bid[1].GetString())
+                        Price = NumericConverter.GetDouble(bid[0].GetString()), 
+                        Volume = NumericConverter.GetDouble(bid[1].GetString()) 
                     });
                 }
             }
@@ -254,8 +251,8 @@
                 {
                     snapshot.Asks.Add(new OrderBookLevel
                     {
-                        Price = double.Parse(ask[0].GetString()),
-                        Volume = double.Parse(ask[1].GetString())
+                        Price = NumericConverter.GetDouble(ask[0].GetString()),
+                        Volume = NumericConverter.GetDouble(ask[1].GetString())
                     });
                 }
             }
@@ -279,8 +276,8 @@
                 {
                     snapshot.Bids.Add(new OrderBookLevel
                     {
-                        Price = double.Parse(bid[0].GetString()),
-                        Volume = double.Parse(bid[1].GetString())
+                        Price = NumericConverter.GetDouble(bid[0].GetString()),
+                        Volume = NumericConverter.GetDouble(bid[1].GetString())
                     });
                 }
             }
@@ -291,8 +288,8 @@
                 {
                     snapshot.Asks.Add(new OrderBookLevel
                     {
-                        Price = double.Parse(ask[0].GetString()),
-                        Volume = double.Parse(ask[1].GetString())
+                        Price = NumericConverter.GetDouble(ask[0].GetString()),
+                        Volume = NumericConverter.GetDouble(ask[1].GetString())
                     });
                 }
             }
@@ -310,8 +307,8 @@
                 trades.Add(new Trade
                 {
                     Id = trade.GetProperty("a").GetInt64().ToString(),
-                    Price = double.Parse(trade.GetProperty("p").GetString()),
-                    Volume = double.Parse(trade.GetProperty("q").GetString()),
+                    Price = NumericConverter.GetDouble(trade.GetProperty("p").GetString()),
+                    Volume = NumericConverter.GetDouble(trade.GetProperty("q").GetString()),
                     Side = trade.GetProperty("m").GetBoolean() ? TradeSide.Sell : TradeSide.Buy,
                     Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(
                         trade.GetProperty("T").GetInt64()).UtcDateTime,

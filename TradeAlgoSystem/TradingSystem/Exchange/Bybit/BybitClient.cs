@@ -1,10 +1,12 @@
 ﻿namespace TradingSystem.Exchange.Bybit
 {
-    using WebSocket4Net;
-    using System.Text.Json;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Text.Json;
     using TradingSystem.Core.Models;
     using TradingSystem.Exchange.Interfaces;
+    using TradingSystem.Helpers.Converters;
+    using WebSocket4Net;
 
     public class BybitClient : IExchangeClient, IDisposable
     {
@@ -123,8 +125,10 @@
 
         public async Task<double> GetOpenInterestAsync(string symbol)
         {
+            var dataLimit = 200;
+            var interval = "5min"; // Interval time. 5min,15min,30min,1h,4h,1d
             var response = await _httpClient.GetAsync(
-                $"/v5/market/open-interest?category=linear&symbol={symbol}"); // &intervalTime={interval}&limit={dataLimit}"
+                $"/v5/market/open-interest?category=linear&symbol={symbol}&intervalTime={interval}&limit={dataLimit}");
                 //$"/v5/market/openInterest?symbol={symbol}&category=linear");
 
             if (response.IsSuccessStatusCode)
@@ -138,7 +142,7 @@
                     var firstItem = list.EnumerateArray().FirstOrDefault();
                     if (firstItem.TryGetProperty("openInterest", out var oi))
                     {
-                        return oi.GetDouble();
+                        return NumericConverter.GetDouble(oi.GetString());
                     }
                 }
             }
@@ -212,17 +216,15 @@
             {
                 foreach (var trade in data.EnumerateArray())
                 {
-                    var tradeObj = new Trade
-                    {
-                        Id = trade.GetProperty("i").GetString(),
-                        Price = trade.GetProperty("p").GetDouble(),
-                        Volume = trade.GetProperty("v").GetDouble(),
-                        Side = trade.GetProperty("S").GetString() == "Buy"
-                            ? TradeSide.Buy : TradeSide.Sell,
-                        Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(
-                            trade.GetProperty("T").GetInt64()).UtcDateTime,
-                        Exchange = ExchangeName
-                    };
+                    var tradeObj = new Trade();
+                    tradeObj.Id = trade.GetProperty("i").GetString();
+                    tradeObj.Price =  NumericConverter.GetDouble(trade.GetProperty("p").GetString());
+                    tradeObj.Volume = NumericConverter.GetDouble(trade.GetProperty("v").GetString());
+                    tradeObj.Side = trade.GetProperty("S").GetString() == "Buy"
+                          ? TradeSide.Buy : TradeSide.Sell;
+                    tradeObj.Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(
+                          trade.GetProperty("T").GetInt64()).UtcDateTime;
+                    tradeObj.Exchange = ExchangeName;
 
                     OnTradeReceived?.Invoke(this, tradeObj);
                 }
@@ -246,8 +248,8 @@
                     {
                         snapshot.Bids.Add(new OrderBookLevel
                         {
-                            Price = double.Parse(bid[0].GetString(), CultureInfo.InvariantCulture),
-                            Volume = double.Parse(bid[1].GetString(), CultureInfo.InvariantCulture)
+                            Price = NumericConverter.GetDouble(bid[0].GetString()), 
+                            Volume = NumericConverter.GetDouble(bid[1].GetString())
                         });
                     }
                 }
@@ -258,8 +260,8 @@
                     {
                         snapshot.Asks.Add(new OrderBookLevel
                         {
-                            Price = double.Parse(ask[0].GetString(), CultureInfo.InvariantCulture),
-                            Volume = double.Parse(ask[1].GetString(), CultureInfo.InvariantCulture)
+                            Price = NumericConverter.GetDouble(ask[0].GetString()),
+                            Volume = NumericConverter.GetDouble(ask[1].GetString())
                         });
                     }
                 }
@@ -286,8 +288,8 @@
                     {
                         snapshot.Bids.Add(new OrderBookLevel
                         {
-                            Price = double.Parse(bid[0].GetString(), CultureInfo.InvariantCulture),
-                            Volume = double.Parse(bid[1].GetString(), CultureInfo.InvariantCulture)
+                            Price = NumericConverter.GetDouble(bid[0].GetString()),
+                            Volume = NumericConverter.GetDouble(bid[1].GetString())
                         });
                     }
                 }
@@ -298,8 +300,8 @@
                     {
                         snapshot.Asks.Add(new OrderBookLevel
                         {
-                            Price = double.Parse(ask[0].GetString(), CultureInfo.InvariantCulture),
-                            Volume = double.Parse(ask[1].GetString(), CultureInfo.InvariantCulture)
+                            Price = NumericConverter.GetDouble(ask[0].GetString()), 
+                            Volume = NumericConverter.GetDouble(ask[1].GetString())    
                         });
                     }
                 }

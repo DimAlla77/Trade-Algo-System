@@ -3657,11 +3657,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
+      "projectUniqueName": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\Trade-Algo-System\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
       "projectName": "TradingSystem",
-      "projectPath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
+      "projectPath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\Trade-Algo-System\\TradeAlgoSystem\\TradingSystem\\TradingSystem.csproj",
       "packagesPath": "C:\\Users\\allad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\TradeAlgoSystem\\TradingSystem\\obj\\",
+      "outputPath": "C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\Trade-Algo-System\\TradeAlgoSystem\\TradingSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

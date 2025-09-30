@@ -7,5 +7,7 @@
 
         public string Bybit_API_Key { get; } = "bwhXYZfIBP4OeJrRhT";
         public string Bybit_API_Secret { get; } = "q5DtFPwRI8jCPMVxhwXzQFBO4lMVnijZlbvu";
+
+        public string ConnectStr { get; } = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\allad\\Desktop\\TradeAlgoSystem\\Trade-Algo-System\\TradeAlgoSystem\\TradingSystem.ConsoleApp\\Database\\TradingSys_Db.mdf;Integrated Security=True";
     }
 }

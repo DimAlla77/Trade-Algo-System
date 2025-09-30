@@ -6,11 +6,12 @@
     public class MarketDataAggregator : IDataAggregator
     {
         private readonly TickBarBuilder _barBuilder;
-        private readonly Queue<Trade> _recentTrades = new();
+        private Queue<Trade> _recentTrades { get; } = new();
         private readonly Dictionary<string, double> _openInterestByExchange = new();
         private OrderBookSnapshot _latestOrderBook;
         private MarketMetrics _currentMetrics = new();
         private readonly int _maxTradeHistory = 10000;
+        private readonly object _recentTradesLock = new();
 
         public MarketDataAggregator(TickBarBuilder barBuilder)
         {
@@ -19,10 +20,13 @@
 
         public void ProcessTrade(Trade trade)
         {
-            _recentTrades.Enqueue(trade);
-            if (_recentTrades.Count > _maxTradeHistory)
-                _recentTrades.Dequeue();
-
+            if (trade == null) return;
+            lock (_recentTradesLock)
+            {
+                _recentTrades.Enqueue(trade);
+                if (_recentTrades.Count > _maxTradeHistory)
+                    _recentTrades.Dequeue();
+            }
             _barBuilder.ProcessTrade(trade);
             UpdateMetrics();
         }
@@ -53,12 +57,16 @@
         private void UpdateMetrics()
         {
             // Update VWAP
-            if (_recentTrades.Any())
+            double vwapSum = 0, volumeSum = 0;
+            lock (_recentTradesLock)
             {
-                var vwapSum = _recentTrades.Sum(t => t.Price * t.Volume);
-                var volumeSum = _recentTrades.Sum(t => t.Volume);
-                _currentMetrics.VWAP = volumeSum > 0 ? vwapSum / volumeSum : 0;
+                if (_recentTrades.Any())
+                {
+                    vwapSum = _recentTrades.Where(t => t != null).Sum(t => t.Price * t.Volume);
+                    volumeSum = _recentTrades.Sum(t => t.Volume);
+                }
             }
+            _currentMetrics.VWAP = volumeSum > 0 ? vwapSum / volumeSum : 0;
 
             // Update ATR (simplified)
             var bars = _barBuilder.GetCompletedBars(1000, 14);

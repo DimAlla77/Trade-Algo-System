@@ -1,0 +1,20 @@
+﻿<Application x:Class="TradingSystem.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TradingSystem.UI"
+             xmlns:conv="clr-namespace:TradingSystem.UI.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <conv:PriceConverter x:Key="priceConv"></conv:PriceConverter>
+            <!--<conv:BooleanConverter x:Key="bToBi" Inverse="True"></conv:BooleanConverter>
+            <conv:DateTimeConverter x:Key="dtToTS"></conv:DateTimeConverter>
+        
+            <conv:DecimalConverter Format="F8" RemoveTrailingZeros="True" x:Key="volConv"></conv:DecimalConverter>
+            <conv:BalanceConverter x:Key="balConv"></conv:BalanceConverter>
+            <conv:BooleanToVisibilityConverter x:Key="bToV"></conv:BooleanToVisibilityConverter>
+            <conv:BooleanToVisibilityConverter Reverse="True" x:Key="bToVi"></conv:BooleanToVisibilityConverter>
+            <conv:TickSpeedConverter x:Key="tickSpeedConv"></conv:TickSpeedConverter>-->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
